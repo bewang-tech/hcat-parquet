@@ -11,7 +11,7 @@ To fix this issue, we can extend MapredParquetOutputFormat and override method g
 
 Another issue is: Sqoop 1 uses deprecated API (`org.apache.hcatalog.mapreduce.OutputJobInfo`), but Pig and Hive uses the new HCatalog API (e.g, `org.apache.hive.hcatalog.mapreduce.OutputJobInfo`). `HCatAwaredParquetOutputFormat` needs to handle the serialized HCatalog Schema using different API. See `DeprecatedParquetSchemaHelper` and `ParquetSchemaHelper`.
 
-Here is how to use this outputformat. For the parquet table 'my_table', define a helper table my_table_hcat_pq with outputformat replaced with HCatAwaredParquetOutputFormat. And two tables share the same location, you can read/write table through the normal table 'my_table' using Hive. Use my_table_hcat_pq only you want to write the table in Pig or Sqoop through HCatalog,
+Here is how to use this outputformat. For the parquet table `my_table`, define a helper table `my_table_hcat_pq` with outputformat replaced with `HCatAwaredParquetOutputFormat`. And two tables share the same location. You can read/write table through the normal table `my_table` using Hive and use `my_table_hcat_pq` only when you want to write the table in Pig or Sqoop through HCatalog. You need to put `hcat-parquet.jar` in `HADOOP_CLASSPATH`.
 ```
 $ export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:$a_path/hcat-parquet.jar
 $ hive
